@@ -5,14 +5,13 @@ var turn_num = 0;
 var floor_count = 1;
 var time = 0
 var gamestate = 0
-
+var high_score = 0
 var position = 0
 var monster = 0
 var stairs = 0
 document.getElementById("Start_btn").addEventListener("click", function(event){
   if (gamestate == 0) {
     setup();
-    // clock();
     gamestate = 1;
     position = document.getElementsByClassName("position")[0];
     monster = document.getElementsByClassName("monster")[0];
@@ -24,13 +23,6 @@ document.getElementById("Start_btn").addEventListener("click", function(event){
     document.getElementById("turn-num").innerHTML = turn_num;
   }
 })
-
-// To do:
-
-
-//score system
-//add a start/reset button
-//add highscore.
 
 
 up.addEventListener("click", function(event){
@@ -81,7 +73,7 @@ function move_up() {
         move(new_location);
       }
       else if (target.classList.contains("wall")) {
-        // damage(target);
+        damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -96,7 +88,7 @@ function move_up() {
         move(new_location);
       }
       else if (target.classList.contains("wall") ) {
-        // damage(target);
+        damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -119,7 +111,7 @@ function move_down(){
         move(new_location);
       }
       else if (target.classList.contains("wall")) {
-        // damage(target);
+        damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -134,7 +126,7 @@ function move_down(){
         move(new_location);
       }
       else if (target.classList.contains("wall")) {
-        // damage(target);
+        damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -157,7 +149,7 @@ function move_left(){
         move(new_location);
       }
       else if (target.classList.contains("wall")) {
-        // damage(target);
+        damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -172,7 +164,7 @@ function move_left(){
         move(new_location, i);
       }
       else if (target.classList.contains("wall")) {
-        // damage(target);
+        damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -195,7 +187,7 @@ function move_right(){
         move(new_location, i);
       }
       else if (target.classList.contains("wall")) {
-        // damage(target);
+        damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -210,7 +202,7 @@ function move_right(){
         move(new_location, i);
       }
       else if (target.classList.contains("wall")) {
-        // damage(target);
+        damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -237,31 +229,31 @@ function endturn(){
 }
 
 function monsterturn(){
-  direction = Math.floor(Math.random() * 4)
-  console.log(direction);
-  for (var i = 0; i < square.length; i++) {
-    tile = square[i]
-    if (tile == monster) {
-      if ((direction == 0) && (i>9)){
-        target = square[i-10]
-        monsteraction(target);
+  for (var m = 0; m < 2; m++) {
+    direction = Math.floor(Math.random() * 4)
+    for (var i = 0; i < square.length; i++) {
+      tile = square[i]
+      if (tile == monster) {
+        if ((direction == 0) && (i>9)|| i>=90){
+          target = square[i-10]
+          monsteraction(target);
+        }
+        else if ((direction == 1) && (i<90) || i<=9) {
+          target = square[i+10]
+          monsteraction(target);
+        }
+        else if ((direction == 2) && (i % 10 != 0) || (((i % 10)-9) == 0)) {
+          target = square[i-1]
+          monsteraction(target);
+        }
+        else if ((direction == 3) && (((i % 10)-9) != 0) || (i % 10 == 0) ) {
+          target = square[i+1]
+          monsteraction(target);
+        }
       }
-      else if ((direction == 1) && (i<90)) {
-        target = square[i+10]
-        monsteraction(target);
-      }
-      else if ((direction == 2) && (i % 10 != 0)) {
-        target = square[i-1]
-        monsteraction(target);
-      }
-      else if ((direction == 3) && (((i % 10)-9) != 0)) {
-        target = square[i+1]
-        monsteraction(target);
-      }
-
     }
+    monster = document.getElementsByClassName("monster")[0];
   }
-  monster = document.getElementsByClassName("monster")[0];
 };
 
 function monsteraction(target){
@@ -280,24 +272,27 @@ function monsteraction(target){
 
 function monstermove(target){
     target.classList.add("monster");
-    // target.classList.remove("health-3");
-    target.classList.remove("wall");
+    target.classList.remove("wall", "health-3", "health-2", "health-1" );
     monster.classList.remove("monster");
     monster.innerHTML = "";
     target.innerHTML = "<img src = \"images/deep_troll_berserker.png\">";
 }
 
 function gameover(){
-  alert("you died")
+  highscore();
+  alert("You died, you reached floor "+ floor_count + ".")
   clear();
+  floor_count=0
+  document.getElementById("floor_count").innerHTML = floor_count;
   gamestate = 0;
 }
+
 function setup(){
   for (var i = 0; i < 50; i++) {
     target = Math.floor(Math.random() * 100)
     new_wall = square[target]
     new_wall.classList.add("wall");
-    // new_wall.classList.add("health-3");
+    new_wall.classList.add("health-3");
     new_wall.innerHTML = "<img src = \"images/catacombs_0.png\">";
   }
 
@@ -305,7 +300,7 @@ function setup(){
   start_check = start_square
   start_pos = square[start_square]
   start_pos.classList.remove("wall");
-  // start_pos.classList.remove("health-3");
+  start_pos.classList.remove("health-3");
   start_pos.classList.add("position");
   start_pos.innerHTML = "<img src = \"images/ironheart_preserver.png\">";
 
@@ -320,13 +315,13 @@ function setup(){
 
     }
   start_stairs.classList.remove("wall");
-  // start_stairs.classList.remove("health-3");
+  start_stairs.classList.remove("health-3");
   start_stairs.classList.add("exit");
   start_stairs.innerHTML = "<img src = \"images/enter_lair.png\">";
 
   start_monster = square[start_square+1]
   start_monster.classList.remove("wall");
-  // start_monster.classList.remove("health-3");
+  start_monster.classList.remove("health-3");
   start_monster.classList.add("monster");
   start_monster.innerHTML = "<img src = \"images/deep_troll_berserker.png\">";
 }
@@ -342,29 +337,31 @@ function clear(){
   var stairs = 0
 }
 
-// function damage(target){
-//   health = target.classList[1]
-//
-//   switch (health) {
-//     case "health-3":
-//       target.classList.remove("health-3");
-//       target.classList.add("health-2");
-//       break;
-//     case "health-2":
-//
-//       target.classList.remove("health-2");
-//       target.classList.add("health-1");
-//       break;
-//     case "health-1":
-//
-//       target.classList.remove("health-1");
-//       target.classList.remove("wall");
-//       target.innerHTML = "";
-//       break;
-//     default:
-//
-//   }
-// }
+function damage(target){
+  health = target.classList[1]
+
+  switch (health) {
+    case "health-3":
+      target.classList.remove("health-3");
+      target.classList.add("health-2");
+      target.innerHTML = "<img src = \"images/catacombs_3.png\">";
+      break;
+    case "health-2":
+
+      target.classList.remove("health-2");
+      target.classList.add("health-1");
+      target.innerHTML = "<img src = \"images/catacombs_6.png\">";
+      break;
+    case "health-1":
+
+      target.classList.remove("health-1");
+      target.classList.remove("wall");
+      target.innerHTML = "";
+      break;
+    default:
+
+  }
+}
 
 function exit (){
   clear();
@@ -376,14 +373,9 @@ function exit (){
   stairs = document.getElementsByClassName("exit")[0];
 }
 
-
-function  clock(){
-  setInterval(function(){
-    if (gamestate = 1) {
-      time++;
-      document.getElementById("time").innerHTML= (time )
-    }else {
-      return;
-    }
-  }, 1000);
+function highscore(){
+  if (floor_count > high_score) {
+    high_score = floor_count;
+  }
+  document.getElementById("high_score").innerHTML = high_score;
 }
