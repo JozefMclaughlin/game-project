@@ -10,7 +10,6 @@ var position = document.getElementsByClassName("position")[0]
 
 
 // To do:
-// add timer
 
 //score system
 
