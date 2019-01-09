@@ -9,6 +9,8 @@ var high_score = 0
 var position = 0
 var monster = 0
 var stairs = 0
+
+
 document.getElementById("Start_btn").addEventListener("click", function(event){
   if (gamestate == 0) {
     setup();
@@ -16,33 +18,35 @@ document.getElementById("Start_btn").addEventListener("click", function(event){
     position = document.getElementsByClassName("position")[0];
     monster = document.getElementsByClassName("monster")[0];
     stairs = document.getElementsByClassName("exit")[0];
+    floor_count = 1;
+    document.getElementById("floor_count").innerHTML = floor_count;
   } else {
     clear();
     gamestate = 0;
-    turn_num = 0
+    turn_num = 0;
+    floor_count = 0;
     document.getElementById("turn-num").innerHTML = turn_num;
+    document.getElementById("floor_count").innerHTML = floor_count;
   }
 })
 
-
 up.addEventListener("click", function(event){
-    move_up();
-  });
+      move_up();
+    });
 
 down.addEventListener("click", function(event){
-    move_down();
-  });
+      move_down();
+    });
 
 left.addEventListener("click", function(event){
-    move_left();
-  });
+      move_left();
+    });
 
 right.addEventListener("click", function(event){
-    move_right();
-  });
+      move_right();
+    });
 
-  //Arrow key functionality
-
+    //Arrow key functionality
 $(document).keydown(function(e){
   switch (e.which) {
     case 37:
@@ -59,9 +63,10 @@ $(document).keydown(function(e){
       break;
     default:
   }
+  e.preventDefault();
+});
 
-    e.preventDefault();
-  });
+
 
 function move_up() {
   for (var i = 0; i < square.length; i++) {
@@ -79,6 +84,7 @@ function move_up() {
       else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
+        return;
       }
     }
     else if (tile == position) {
@@ -94,6 +100,7 @@ function move_up() {
       else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
+        return;
       }
     }
   }
@@ -117,6 +124,7 @@ function move_down(){
       else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
+        return;
       }
     }
     else if (tile == position) {
@@ -132,6 +140,7 @@ function move_down(){
       else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
+        return;
       }
     }
   }
@@ -155,6 +164,7 @@ function move_left(){
       else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
+        return;
       }
     }
     else if (tile == position) {
@@ -170,6 +180,7 @@ function move_left(){
       else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
+        return;
       }
     }
   }
@@ -193,6 +204,7 @@ function move_right(){
       else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
+        return;
       }
     }
     else if (tile == position) {
@@ -208,6 +220,7 @@ function move_right(){
       else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
+        return;
       }
     }
   }
@@ -229,8 +242,9 @@ function endturn(){
 }
 
 function monsterturn(){
-  for (var m = 0; m < 2; m++) {
+  for (var m = 0; m < ((floor_count/5)); m++) {
     direction = Math.floor(Math.random() * 4)
+    console.log(direction);
     for (var i = 0; i < square.length; i++) {
       tile = square[i]
       if (tile == monster) {
@@ -263,6 +277,7 @@ function monsteraction(target){
   }
   else if (target == position) {
     gameover();
+    return;
   }
   else if (target == stairs) {
     target == monster
@@ -282,8 +297,10 @@ function gameover(){
   highscore();
   alert("You died, you reached floor "+ floor_count + ".")
   clear();
-  floor_count=0
+  floor_count=0;
+  turn_num = -1;
   document.getElementById("floor_count").innerHTML = floor_count;
+  document.getElementById("turn-num").innerHTML = turn_num;
   gamestate = 0;
 }
 
@@ -306,20 +323,29 @@ function setup(){
 
 
 
-  start_square = Math.floor(Math.random() * 50)
+  start_stairs_square = Math.floor(Math.random() * 50)
     if(start_check < 50){
-      start_stairs = square[(start_square + 50)]
+      start_stairs = square[(start_stairs_square + 50)]
     }
     else if (start_check <100) {
-      start_stairs = square[start_square]
-
+      start_stairs = square[start_stairs_square]
     }
   start_stairs.classList.remove("wall");
   start_stairs.classList.remove("health-3");
   start_stairs.classList.add("exit");
   start_stairs.innerHTML = "<img src = \"images/enter_lair.png\">";
 
-  start_monster = square[start_square+1]
+  start_monster_square = Math.floor(Math.random() * 50)
+  if (start_monster_square == start_stairs_square) {
+    start_monster_square = start_monster_square + 1
+  }
+    if(start_check < 50){
+      start_monster = square[(start_monster_square + 50)]
+    }
+    else if (start_check <100) {
+      start_monster = square[start_monster_square]
+
+    }
   start_monster.classList.remove("wall");
   start_monster.classList.remove("health-3");
   start_monster.classList.add("monster");
