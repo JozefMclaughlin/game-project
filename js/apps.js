@@ -7,13 +7,14 @@ var time = 0
 var gamestate = 0
 
 var position = 0
-
+// var monster = 0
 document.getElementById("Start_btn").addEventListener("click", function(event){
   if (gamestate == 0) {
     setup();
     // clock();
     gamestate = 1;
-    position = document.getElementsByClassName("position")[0]
+    position = document.getElementsByClassName("position")[0];
+    // monster = document.getElementsByClassName("monster")[0];
   } else {
     clear();
     gamestate = 0;
@@ -228,12 +229,17 @@ function move(new_location){
 }
 
 function endturn(){
+  // monsterturn();
   turn_num = (turn_num + 1)
-
   document.getElementById("turn-num").innerHTML = turn_num;
 }
 
-
+// monsterturn(){
+//   direction = Math.floor(Math.random() * 4)
+//   for (var i = 0; i < square.length; i++) {
+//     square[i]
+//   }
+// };
 function setup(){
   for (var i = 0; i < 50; i++) {
     target = Math.floor(Math.random() * 100)
@@ -266,6 +272,11 @@ function setup(){
   start_stairs.classList.add("exit");
   start_stairs.innerHTML = "<img src = \"images/enter_lair.png\">";
 
+  // start_monster = square[start_square+1]
+  // start_monster.classList.remove("wall");
+  // start_monster.classList.remove("health-3");
+  // start_monster.classList.add("monster");
+  // start_monster.innerHTML = "<img src = \"images/deep_troll_berserker.png\">";
 }
 
 function clear(){
