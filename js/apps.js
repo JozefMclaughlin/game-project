@@ -11,8 +11,8 @@ var position = document.getElementsByClassName("position")[0]
 
 // To do:
 
-//score system
 
+//score system
 //add a start/reset button
 //add highscore.
 up.addEventListener("click", function(event){
@@ -199,7 +199,7 @@ function endturn(){
 
 
 function setup(){
-  for (var i = 0; i < 60; i++) {
+  for (var i = 0; i < 50; i++) {
     target = Math.floor(Math.random() * 100)
     new_wall = square[target]
     new_wall.classList.add("wall");
