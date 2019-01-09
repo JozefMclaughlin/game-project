@@ -41,11 +41,11 @@ function move_up() {
         new_location = target
         move(new_location);
       }
-      else if (target.innerHTML == "#") {
+      else if (target.classList.contains("wall")) {
         damage(target);
         new_location = position;
       }
-      else if (target.innerHTML == "E") {
+      else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
       }
@@ -56,11 +56,11 @@ function move_up() {
         new_location = target;
         move(new_location);
       }
-      else if (target.innerHTML == "#") {
+      else if (target.classList.contains("wall") ) {
         damage(target);
         new_location = position;
       }
-      else if (target.innerHTML == "E") {
+      else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
       }
@@ -79,11 +79,11 @@ function move_down(){
         new_location = target
         move(new_location);
       }
-      else if (target.innerHTML == "#") {
+      else if (target.classList.contains("wall")) {
         damage(target);
         new_location = position;
       }
-      else if (target.innerHTML == "E") {
+      else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
       }
@@ -94,11 +94,11 @@ function move_down(){
         new_location = target
         move(new_location);
       }
-      else if (target.innerHTML == "#") {
+      else if (target.classList.contains("wall")) {
         damage(target);
         new_location = position;
       }
-      else if (target.innerHTML == "E") {
+      else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
       }
@@ -117,11 +117,11 @@ function move_left(){
         new_location = target
         move(new_location);
       }
-      else if (target.innerHTML == "#") {
+      else if (target.classList.contains("wall")) {
         damage(target);
         new_location = position;
       }
-      else if (target.innerHTML == "E") {
+      else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
       }
@@ -132,11 +132,11 @@ function move_left(){
         new_location = target;
         move(new_location, i);
       }
-      else if (target.innerHTML == "#") {
+      else if (target.classList.contains("wall")) {
         damage(target);
         new_location = position;
       }
-      else if (target.innerHTML == "E") {
+      else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
       }
@@ -155,11 +155,11 @@ function move_right(){
         new_location = target
         move(new_location, i);
       }
-      else if (target.innerHTML == "#") {
+      else if (target.classList.contains("wall")) {
         damage(target);
         new_location = position;
       }
-      else if (target.innerHTML == "E") {
+      else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
       }
@@ -170,11 +170,11 @@ function move_right(){
         new_location = target
         move(new_location, i);
       }
-      else if (target.innerHTML == "#") {
+      else if (target.classList.contains("wall")) {
         damage(target);
         new_location = position;
       }
-      else if (target.innerHTML == "E") {
+      else if (target.classList.contains("exit")) {
         exit();
         new_location = document.getElementsByClassName("position")[0];
       }
@@ -188,7 +188,7 @@ function move(new_location){
     new_location.classList.add("position");
     position.classList.remove("position");
     position.innerHTML = "";
-    new_location.innerHTML = "@";
+    new_location.innerHTML = "<img src = \"images/ironheart_preserver.png\">";
 }
 
 function endturn(){
@@ -204,7 +204,7 @@ function setup(){
     new_wall = square[target]
     new_wall.classList.add("wall");
     new_wall.classList.add("health-3");
-    new_wall.innerHTML = "#";
+    new_wall.innerHTML = "<img src = \"images/catacombs_0.png\">";
   }
 
   start_square = Math.floor(Math.random() * 100)
@@ -213,7 +213,7 @@ function setup(){
   start_pos.classList.remove("wall");
   start_pos.classList.remove("health-3");
   start_pos.classList.add("position");
-  start_pos.innerHTML = "@";
+  start_pos.innerHTML = "<img src = \"images/ironheart_preserver.png\">";
 
 
 
@@ -228,7 +228,7 @@ function setup(){
   start_stairs.classList.remove("wall");
   start_stairs.classList.remove("health-3");
   start_stairs.classList.add("exit");
-  start_stairs.innerHTML = "E";
+  start_stairs.innerHTML = "<img src = \"images/enter_lair.png\">";
 
 }
 
