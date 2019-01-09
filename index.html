@@ -12,11 +12,14 @@
   <body>
 
     <h1 class="title">Maze</h1>
-    <button type="button" name="button"> Start</button>
+    <div class="Start_container">
+      <button type="button" name="button" id="Start_btn"> Start</button>
+    </div>
     <div class="game-modes">
       <button type="button" name="button">Free play</button>
       <button type="button" name="button">Turn Limit</button>
       <button type="button" name="button">Timed Run</button>
+      <h4>Current Mode: <p>Free Play</p> </h4>
     </div>
 
 
@@ -25,148 +28,150 @@
       <h3 class = "floor_counter">Floor: <p id="floor_count">1</p>
       <h3 class="timer">Time: <p id="time">0</p> </h3>
     </div>
-    <table class="board">
-      <thead>
-        <tr>
-          <td data-num="0"></td>
-          <td data-num="1"></td>
-          <td data-num="2"></td>
-          <td data-num="3"></td>
-          <td data-num="4"></td>
-          <td data-num="5"></td>
-          <td data-num="6"></td>
-          <td data-num="7"></td>
-          <td data-num="8"></td>
-          <td data-num="9"></td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td data-num="10"></td>
-          <td data-num="11"></td>
-          <td data-num="12"></td>
-          <td data-num="13"></td>
-          <td data-num="14"></td>
-          <td data-num="15"></td>
-          <td data-num="16"></td>
-          <td data-num="17"></td>
-          <td data-num="18"></td>
-          <td data-num="19"></td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td data-num="20"></td>
-          <td data-num="21"></td>
-          <td data-num="22"></td>
-          <td data-num="23"></td>
-          <td data-num="24"></td>
-          <td data-num="25"></td>
-          <td data-num="26"></td>
-          <td data-num="27"></td>
-          <td data-num="28"></td>
-          <td data-num="29"></td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td data-num="30"></td>
-          <td data-num="31"></td>
-          <td data-num="32"></td>
-          <td data-num="33"></td>
-          <td data-num="34"></td>
-          <td data-num="35"></td>
-          <td data-num="36"></td>
-          <td data-num="37"></td>
-          <td data-num="38"></td>
-          <td data-num="39"></td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td data-num="40"></td>
-          <td data-num="41"></td>
-          <td data-num="42"></td>
-          <td data-num="43"></td>
-          <td data-num="44"></td>
-          <td data-num="45"></td>
-          <td data-num="46"></td>
-          <td data-num="47"></td>
-          <td data-num="48"></td>
-          <td data-num="49"></td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td data-num="50"></td>
-          <td data-num="51"></td>
-          <td data-num="52"></td>
-          <td data-num="53"></td>
-          <td data-num="54"></td>
-          <td data-num="55"></td>
-          <td data-num="56"></td>
-          <td data-num="57"></td>
-          <td data-num="58"></td>
-          <td data-num="59"></td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td data-num="60"></td>
-          <td data-num="61"></td>
-          <td data-num="62"></td>
-          <td data-num="63"></td>
-          <td data-num="64"></td>
-          <td data-num="65"></td>
-          <td data-num="66"></td>
-          <td data-num="67"></td>
-          <td data-num="68"></td>
-          <td data-num="69"></td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td data-num="70"></td>
-          <td data-num="71"></td>
-          <td data-num="72"></td>
-          <td data-num="73"></td>
-          <td data-num="74"></td>
-          <td data-num="75"></td>
-          <td data-num="76"></td>
-          <td data-num="77"></td>
-          <td data-num="78"></td>
-          <td data-num="79"></td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td data-num="80"></td>
-          <td data-num="81"></td>
-          <td data-num="82"></td>
-          <td data-num="83"></td>
-          <td data-num="84"></td>
-          <td data-num="85"></td>
-          <td data-num="86"></td>
-          <td data-num="87"></td>
-          <td data-num="88"></td>
-          <td data-num="89"></td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td data-num="90"></td>
-          <td data-num="91"></td>
-          <td data-num="92"></td>
-          <td data-num="93"></td>
-          <td data-num="94"></td>
-          <td data-num="95"></td>
-          <td data-num="96"></td>
-          <td data-num="97"></td>
-          <td data-num="98"></td>
-          <td data-num="99"></td>
-        </tr>
-      </tfoot>
-    </table>
+    <div class="gameboard">
+      <table class="board">
+        <thead>
+          <tr>
+            <td data-num="0"></td>
+            <td data-num="1"></td>
+            <td data-num="2"></td>
+            <td data-num="3"></td>
+            <td data-num="4"></td>
+            <td data-num="5"></td>
+            <td data-num="6"></td>
+            <td data-num="7"></td>
+            <td data-num="8"></td>
+            <td data-num="9"></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-num="10"></td>
+            <td data-num="11"></td>
+            <td data-num="12"></td>
+            <td data-num="13"></td>
+            <td data-num="14"></td>
+            <td data-num="15"></td>
+            <td data-num="16"></td>
+            <td data-num="17"></td>
+            <td data-num="18"></td>
+            <td data-num="19"></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td data-num="20"></td>
+            <td data-num="21"></td>
+            <td data-num="22"></td>
+            <td data-num="23"></td>
+            <td data-num="24"></td>
+            <td data-num="25"></td>
+            <td data-num="26"></td>
+            <td data-num="27"></td>
+            <td data-num="28"></td>
+            <td data-num="29"></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td data-num="30"></td>
+            <td data-num="31"></td>
+            <td data-num="32"></td>
+            <td data-num="33"></td>
+            <td data-num="34"></td>
+            <td data-num="35"></td>
+            <td data-num="36"></td>
+            <td data-num="37"></td>
+            <td data-num="38"></td>
+            <td data-num="39"></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td data-num="40"></td>
+            <td data-num="41"></td>
+            <td data-num="42"></td>
+            <td data-num="43"></td>
+            <td data-num="44"></td>
+            <td data-num="45"></td>
+            <td data-num="46"></td>
+            <td data-num="47"></td>
+            <td data-num="48"></td>
+            <td data-num="49"></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td data-num="50"></td>
+            <td data-num="51"></td>
+            <td data-num="52"></td>
+            <td data-num="53"></td>
+            <td data-num="54"></td>
+            <td data-num="55"></td>
+            <td data-num="56"></td>
+            <td data-num="57"></td>
+            <td data-num="58"></td>
+            <td data-num="59"></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td data-num="60"></td>
+            <td data-num="61"></td>
+            <td data-num="62"></td>
+            <td data-num="63"></td>
+            <td data-num="64"></td>
+            <td data-num="65"></td>
+            <td data-num="66"></td>
+            <td data-num="67"></td>
+            <td data-num="68"></td>
+            <td data-num="69"></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td data-num="70"></td>
+            <td data-num="71"></td>
+            <td data-num="72"></td>
+            <td data-num="73"></td>
+            <td data-num="74"></td>
+            <td data-num="75"></td>
+            <td data-num="76"></td>
+            <td data-num="77"></td>
+            <td data-num="78"></td>
+            <td data-num="79"></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td data-num="80"></td>
+            <td data-num="81"></td>
+            <td data-num="82"></td>
+            <td data-num="83"></td>
+            <td data-num="84"></td>
+            <td data-num="85"></td>
+            <td data-num="86"></td>
+            <td data-num="87"></td>
+            <td data-num="88"></td>
+            <td data-num="89"></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td data-num="90"></td>
+            <td data-num="91"></td>
+            <td data-num="92"></td>
+            <td data-num="93"></td>
+            <td data-num="94"></td>
+            <td data-num="95"></td>
+            <td data-num="96"></td>
+            <td data-num="97"></td>
+            <td data-num="98"></td>
+            <td data-num="99"></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
 
 
   <div class="controls">
