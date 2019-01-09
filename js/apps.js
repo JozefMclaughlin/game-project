@@ -7,14 +7,16 @@ var time = 0
 var gamestate = 0
 
 var position = 0
-// var monster = 0
+var monster = 0
+var stairs = 0
 document.getElementById("Start_btn").addEventListener("click", function(event){
   if (gamestate == 0) {
     setup();
     // clock();
     gamestate = 1;
     position = document.getElementsByClassName("position")[0];
-    // monster = document.getElementsByClassName("monster")[0];
+    monster = document.getElementsByClassName("monster")[0];
+    stairs = document.getElementsByClassName("exit")[0];
   } else {
     clear();
     gamestate = 0;
@@ -79,7 +81,7 @@ function move_up() {
         move(new_location);
       }
       else if (target.classList.contains("wall")) {
-        damage(target);
+        // damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -94,7 +96,7 @@ function move_up() {
         move(new_location);
       }
       else if (target.classList.contains("wall") ) {
-        damage(target);
+        // damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -117,7 +119,7 @@ function move_down(){
         move(new_location);
       }
       else if (target.classList.contains("wall")) {
-        damage(target);
+        // damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -132,7 +134,7 @@ function move_down(){
         move(new_location);
       }
       else if (target.classList.contains("wall")) {
-        damage(target);
+        // damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -155,7 +157,7 @@ function move_left(){
         move(new_location);
       }
       else if (target.classList.contains("wall")) {
-        damage(target);
+        // damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -170,7 +172,7 @@ function move_left(){
         move(new_location, i);
       }
       else if (target.classList.contains("wall")) {
-        damage(target);
+        // damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -193,7 +195,7 @@ function move_right(){
         move(new_location, i);
       }
       else if (target.classList.contains("wall")) {
-        damage(target);
+        // damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -208,7 +210,7 @@ function move_right(){
         move(new_location, i);
       }
       else if (target.classList.contains("wall")) {
-        damage(target);
+        // damage(target);
         new_location = position;
       }
       else if (target.classList.contains("exit")) {
@@ -229,23 +231,73 @@ function move(new_location){
 }
 
 function endturn(){
-  // monsterturn();
+  monsterturn();
   turn_num = (turn_num + 1)
   document.getElementById("turn-num").innerHTML = turn_num;
 }
 
-// monsterturn(){
-//   direction = Math.floor(Math.random() * 4)
-//   for (var i = 0; i < square.length; i++) {
-//     square[i]
-//   }
-// };
+function monsterturn(){
+  direction = Math.floor(Math.random() * 4)
+  console.log(direction);
+  for (var i = 0; i < square.length; i++) {
+    tile = square[i]
+    if (tile == monster) {
+      if ((direction == 0) && (i>9)){
+        target = square[i-10]
+        monsteraction(target);
+      }
+      else if ((direction == 1) && (i<90)) {
+        target = square[i+10]
+        monsteraction(target);
+      }
+      else if ((direction == 2) && (i % 10 != 0)) {
+        target = square[i-1]
+        monsteraction(target);
+      }
+      else if ((direction == 3) && (((i % 10)-9) != 0)) {
+        target = square[i+1]
+        monsteraction(target);
+      }
+
+    }
+  }
+  monster = document.getElementsByClassName("monster")[0];
+};
+
+function monsteraction(target){
+  if ((target != stairs) && (target != position)) {
+    monstermove(target);
+    return target;
+  }
+  else if (target == position) {
+    gameover();
+  }
+  else if (target == stairs) {
+    target == monster
+    return target;
+  }
+}
+
+function monstermove(target){
+    target.classList.add("monster");
+    // target.classList.remove("health-3");
+    target.classList.remove("wall");
+    monster.classList.remove("monster");
+    monster.innerHTML = "";
+    target.innerHTML = "<img src = \"images/deep_troll_berserker.png\">";
+}
+
+function gameover(){
+  alert("you died")
+  clear();
+  gamestate = 0;
+}
 function setup(){
   for (var i = 0; i < 50; i++) {
     target = Math.floor(Math.random() * 100)
     new_wall = square[target]
     new_wall.classList.add("wall");
-    new_wall.classList.add("health-3");
+    // new_wall.classList.add("health-3");
     new_wall.innerHTML = "<img src = \"images/catacombs_0.png\">";
   }
 
@@ -253,7 +305,7 @@ function setup(){
   start_check = start_square
   start_pos = square[start_square]
   start_pos.classList.remove("wall");
-  start_pos.classList.remove("health-3");
+  // start_pos.classList.remove("health-3");
   start_pos.classList.add("position");
   start_pos.innerHTML = "<img src = \"images/ironheart_preserver.png\">";
 
@@ -268,54 +320,60 @@ function setup(){
 
     }
   start_stairs.classList.remove("wall");
-  start_stairs.classList.remove("health-3");
+  // start_stairs.classList.remove("health-3");
   start_stairs.classList.add("exit");
   start_stairs.innerHTML = "<img src = \"images/enter_lair.png\">";
 
-  // start_monster = square[start_square+1]
-  // start_monster.classList.remove("wall");
+  start_monster = square[start_square+1]
+  start_monster.classList.remove("wall");
   // start_monster.classList.remove("health-3");
-  // start_monster.classList.add("monster");
-  // start_monster.innerHTML = "<img src = \"images/deep_troll_berserker.png\">";
+  start_monster.classList.add("monster");
+  start_monster.innerHTML = "<img src = \"images/deep_troll_berserker.png\">";
 }
 
 function clear(){
   for (var i = 0; i < square.length; i++){
   tile = square[i]
 
-  tile.classList.remove("wall", "health-3", "health-2", "health-1", "exit", "position");
+  tile.classList.remove("wall", "health-3", "health-2", "health-1", "exit", "position", "monster");
   tile.innerHTML = "";}
+  var position = 0
+  var monster = 0
+  var stairs = 0
 }
 
-function damage(target){
-  health = target.classList[1]
-
-  switch (health) {
-    case "health-3":
-      target.classList.remove("health-3");
-      target.classList.add("health-2");
-      break;
-    case "health-2":
-
-      target.classList.remove("health-2");
-      target.classList.add("health-1");
-      break;
-    case "health-1":
-
-      target.classList.remove("health-1");
-      target.classList.remove("wall");
-      target.innerHTML = "";
-      break;
-    default:
-
-  }
-}
+// function damage(target){
+//   health = target.classList[1]
+//
+//   switch (health) {
+//     case "health-3":
+//       target.classList.remove("health-3");
+//       target.classList.add("health-2");
+//       break;
+//     case "health-2":
+//
+//       target.classList.remove("health-2");
+//       target.classList.add("health-1");
+//       break;
+//     case "health-1":
+//
+//       target.classList.remove("health-1");
+//       target.classList.remove("wall");
+//       target.innerHTML = "";
+//       break;
+//     default:
+//
+//   }
+// }
 
 function exit (){
   clear();
   setup();
   floor_count = (floor_count + 1)
   document.getElementById("floor_count").innerHTML = floor_count;
+  position = document.getElementsByClassName("position")[0];
+  monster = document.getElementsByClassName("monster")[0];
+  stairs = document.getElementsByClassName("exit")[0];
 }
 
 
