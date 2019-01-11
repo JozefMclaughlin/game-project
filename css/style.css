@@ -26,12 +26,17 @@ td {
   text-align: center;
   width: 100%
 }
-.game-modes{
+.Intro{
   display: inline-block;
+  width: 100%;
+}
+.about{
   justify-content: center;
-  align-items: center;
   text-align: center;
-  width: 100%
+}
+.control_info p{
+  justify-content: center;
+  text-align: center;
 }
 .Start_container button{
   width: 50px;
