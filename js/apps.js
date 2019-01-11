@@ -21,6 +21,7 @@ document.getElementById("Start_btn").addEventListener("click", function(event){
     stairs = document.getElementsByClassName("exit")[0];
     floor_count = 1;
     document.getElementById("floor_count").innerHTML = floor_count;
+    document.getElementById("Start_btn").innerHTML = "Stop"
   } else {
     clear();
     gamestate = 0;
@@ -28,6 +29,7 @@ document.getElementById("Start_btn").addEventListener("click", function(event){
     floor_count = 0;
     document.getElementById("turn-num").innerHTML = turn_num;
     document.getElementById("floor_count").innerHTML = floor_count;
+    document.getElementById("Start_btn").innerHTML = "Start"
   }
 })
 
@@ -249,7 +251,6 @@ function endturn(){
 function monsterturn(){
   for (var m = 0; m < ((floor_count/5)); m++) {
     direction = Math.floor(Math.random() * 4)
-    console.log(direction);
     for (var i = 0; i < square.length; i++) {
       tile = square[i]
       if (tile == monster) {
@@ -310,6 +311,7 @@ function gameover(){
   document.getElementById("floor_count").innerHTML = floor_count;
   document.getElementById("turn-num").innerHTML = turn_num;
   gamestate = 0;
+  document.getElementById("Start_btn").innerHTML = "Start"
 }
 
 // generate map
@@ -368,9 +370,9 @@ function clear(){
 
   tile.classList.remove("wall", "health-3", "health-2", "health-1", "exit", "position", "monster");
   tile.innerHTML = "";}
-  var position = 0
-  var monster = 0
-  var stairs = 0
+  var position = null;
+  var monster = null;
+  var stairs = null;
 }
 
 // reduce wall health
