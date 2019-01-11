@@ -12,6 +12,7 @@
   <body>
 
     <h1 class="title">Troll Maze</h1>
+    <!-- About section and Instructions for thr game -->
     <div class="Intro">
       <p class="about">Welcome to the troll maze. How far can you descend befor the trolls get to you. Beware the deeper you go the more powerfull the trolls.</p>
       <div class="control_info">
@@ -24,17 +25,19 @@
 
       </div>
     </div>
-
+    <!-- Button to iniiate the game or stop it if running -->
     <div class="Start_container">
       <button type="button" name="button" id="Start_btn"> Start</button>
     </div>
 
-
+    <!-- Display of information for curent run and Highest score -->
     <div class="scoreboard">
       <h3 class= "turn counter">Turn Count: <p id="turn-num">0</p> </h3>
       <h3 class = "floor_counter">Floor: <p id="floor_count">0</p>
       <h3 class="score">Highest Floor:  <p id="high_score">0</p> </h3>
     </div>
+
+    <!-- Table acts as grid for movement -->
     <div class="gameboard">
       <table class="board">
         <thead>
@@ -180,7 +183,7 @@
       </table>
     </div>
 
-
+  <!-- Controls for use if arrow keys not avaliable -->
   <div class="controls">
     <button type="button" name="up" class="up" id="up">Up</button>
     <button type="button" name="left" class="left" id="left">Left</button>

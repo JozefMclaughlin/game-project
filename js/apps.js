@@ -1,5 +1,6 @@
 console.log("Loaded");
 
+// Initial variables
 var square = document.getElementsByTagName("td");
 var turn_num = 0;
 var floor_count = 1;
@@ -10,7 +11,7 @@ var position = 0
 var monster = 0
 var stairs = 0
 
-
+// Start button
 document.getElementById("Start_btn").addEventListener("click", function(event){
   if (gamestate == 0) {
     setup();
@@ -30,6 +31,7 @@ document.getElementById("Start_btn").addEventListener("click", function(event){
   }
 })
 
+// Controls
 up.addEventListener("click", function(event){
       move_up();
     });
@@ -67,7 +69,7 @@ $(document).keydown(function(e){
 });
 
 
-
+// movement targeting functions
 function move_up() {
   for (var i = 0; i < square.length; i++) {
     tile = square[i]
@@ -228,6 +230,7 @@ function move_right(){
   endturn();
 };
 
+// transition command
 function move(new_location){
     new_location.classList.add("position");
     position.classList.remove("position");
@@ -235,12 +238,14 @@ function move(new_location){
     new_location.innerHTML = "<img src = \"images/ironheart_preserver.png\">";
 }
 
+// functions to be ran at end of turn
 function endturn(){
   monsterturn();
   turn_num = (turn_num + 1)
   document.getElementById("turn-num").innerHTML = turn_num;
 }
 
+// what monster will do
 function monsterturn(){
   for (var m = 0; m < ((floor_count/5)); m++) {
     direction = Math.floor(Math.random() * 4)
@@ -270,6 +275,7 @@ function monsterturn(){
   }
 };
 
+// How monster interacts with tiles
 function monsteraction(target){
   if ((target != stairs) && (target != position)) {
     monstermove(target);
@@ -285,6 +291,7 @@ function monsteraction(target){
   }
 }
 
+// Moving monster to new tile
 function monstermove(target){
     target.classList.add("monster");
     target.classList.remove("wall", "health-3", "health-2", "health-1" );
@@ -293,6 +300,7 @@ function monstermove(target){
     target.innerHTML = "<img src = \"images/deep_troll_berserker.png\">";
 }
 
+// end game, reset and set high score if relevant
 function gameover(){
   highscore();
   alert("You died, you reached floor "+ floor_count + ".")
@@ -304,6 +312,7 @@ function gameover(){
   gamestate = 0;
 }
 
+// generate map
 function setup(){
   for (var i = 0; i < 50; i++) {
     target = Math.floor(Math.random() * 100)
@@ -352,6 +361,7 @@ function setup(){
   start_monster.innerHTML = "<img src = \"images/deep_troll_berserker.png\">";
 }
 
+// clear map
 function clear(){
   for (var i = 0; i < square.length; i++){
   tile = square[i]
@@ -363,6 +373,7 @@ function clear(){
   var stairs = 0
 }
 
+// reduce wall health
 function damage(target){
   health = target.classList[1]
 
@@ -389,6 +400,7 @@ function damage(target){
   }
 }
 
+//clear and generate new floor on reaching exit
 function exit (){
   clear();
   setup();
@@ -399,6 +411,7 @@ function exit (){
   stairs = document.getElementsByClassName("exit")[0];
 }
 
+//calculate and return the highscore
 function highscore(){
   if (floor_count > high_score) {
     high_score = floor_count;
