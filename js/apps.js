@@ -4,12 +4,12 @@ console.log("Loaded");
 var square = document.getElementsByTagName("td");
 var turn_num = 0;
 var floor_count = 1;
-var time = 0
-var gamestate = 0
-var high_score = 0
-var position = 0
-var monster = 0
-var stairs = 0
+var time = 0;
+var gamestate = 0;
+var high_score = 0;
+var position = 0;
+var monster = 0;
+var stairs = 0;
 
 // Start button
 document.getElementById("Start_btn").addEventListener("click", function(event){
@@ -21,7 +21,7 @@ document.getElementById("Start_btn").addEventListener("click", function(event){
     stairs = document.getElementsByClassName("exit")[0];
     floor_count = 1;
     document.getElementById("floor_count").innerHTML = floor_count;
-    document.getElementById("Start_btn").innerHTML = "Stop"
+    document.getElementById("Start_btn").innerHTML = "Stop";
   } else {
     clear();
     gamestate = 0;
@@ -29,9 +29,9 @@ document.getElementById("Start_btn").addEventListener("click", function(event){
     floor_count = 0;
     document.getElementById("turn-num").innerHTML = turn_num;
     document.getElementById("floor_count").innerHTML = floor_count;
-    document.getElementById("Start_btn").innerHTML = "Start"
+    document.getElementById("Start_btn").innerHTML = "Start";
   }
-})
+});
 
 // Controls
 up.addEventListener("click", function(event){
@@ -51,6 +51,7 @@ right.addEventListener("click", function(event){
     });
 
     //Arrow key functionality
+
 $(document).keydown(function(e){
   switch (e.which) {
     case 37:
@@ -74,11 +75,11 @@ $(document).keydown(function(e){
 // movement targeting functions
 function move_up() {
   for (var i = 0; i < square.length; i++) {
-    tile = square[i]
+    tile = square[i];
     if ((tile == position)&&(i<=9)) {
       target = square[i+90];
       if (target.innerHTML == "") {
-        new_location = target
+        new_location = target;
         move(new_location);
       }
       else if (target.classList.contains("wall")) {
@@ -108,17 +109,17 @@ function move_up() {
       }
     }
   }
-  position = new_location
+  position = new_location;
   endturn();
 };
 
 function move_down(){
   for (var i = 0; i < square.length; i++) {
-    tile = square[i]
+    tile = square[i];
     if ((tile == position)&&( i>= 90)) {
-      target = square[i-90]
+      target = square[i-90];
       if (target.innerHTML == "") {
-        new_location = target
+        new_location = target;
         move(new_location);
       }
       else if (target.classList.contains("wall")) {
@@ -132,9 +133,9 @@ function move_down(){
       }
     }
     else if (tile == position) {
-      target = square[i+10]
+      target = square[i+10];
       if (target.innerHTML == "") {
-        new_location = target
+        new_location = target;
         move(new_location);
       }
       else if (target.classList.contains("wall")) {
@@ -154,11 +155,11 @@ function move_down(){
 
 function move_left(){
   for (var i = 0; i < square.length; i++) {
-    tile = square[i]
+    tile = square[i];
     if ((tile == position) && (i % 10 == 0)) {
-      target = square[i+9]
+      target = square[i+9];
       if (target.innerHTML == "") {
-        new_location = target
+        new_location = target;
         move(new_location);
       }
       else if (target.classList.contains("wall")) {
@@ -194,11 +195,11 @@ function move_left(){
 
 function move_right(){
   for (var i = 0; i < square.length; i++) {
-    tile = square[i]
+    tile = square[i];
     if ((tile == position) && (((i % 10)-9) == 0)) {
-      target = square[i-9]
+      target = square[i-9];
       if (target.innerHTML == "") {
-        new_location = target
+        new_location = target;
         move(new_location, i);
       }
       else if (target.classList.contains("wall")) {
@@ -212,9 +213,9 @@ function move_right(){
       }
     }
     else if (tile == position) {
-      target = square[i+1]
+      target = square[i+1];
       if (target.innerHTML == "") {
-        new_location = target
+        new_location = target;
         move(new_location, i);
       }
       else if (target.classList.contains("wall")) {
@@ -243,31 +244,31 @@ function move(new_location){
 // functions to be ran at end of turn
 function endturn(){
   monsterturn();
-  turn_num = (turn_num + 1)
+  turn_num = (turn_num + 1);
   document.getElementById("turn-num").innerHTML = turn_num;
 }
 
 // what monster will do
 function monsterturn(){
   for (var m = 0; m < ((floor_count/5)); m++) {
-    direction = Math.floor(Math.random() * 4)
+    direction = Math.floor(Math.random() * 4);
     for (var i = 0; i < square.length; i++) {
-      tile = square[i]
+      tile = square[i];
       if (tile == monster) {
         if ((direction == 0) && (i>9)|| i>=90){
-          target = square[i-10]
+          target = square[i-10];
           monsteraction(target);
         }
         else if ((direction == 1) && (i<90) || i<=9) {
-          target = square[i+10]
+          target = square[i+10];
           monsteraction(target);
         }
         else if ((direction == 2) && (i % 10 != 0) || (((i % 10)-9) == 0)) {
-          target = square[i-1]
+          target = square[i-1];
           monsteraction(target);
         }
         else if ((direction == 3) && (((i % 10)-9) != 0) || (i % 10 == 0) ) {
-          target = square[i+1]
+          target = square[i+1];
           monsteraction(target);
         }
       }
@@ -287,7 +288,7 @@ function monsteraction(target){
     return;
   }
   else if (target == stairs) {
-    target == monster
+    target = monster;
     return target;
   }
 }
@@ -304,29 +305,29 @@ function monstermove(target){
 // end game, reset and set high score if relevant
 function gameover(){
   highscore();
-  alert("You died, you reached floor "+ floor_count + ".")
+  alert("You died, you reached floor "+ floor_count + ".");
   clear();
   floor_count=0;
   turn_num = -1;
   document.getElementById("floor_count").innerHTML = floor_count;
   document.getElementById("turn-num").innerHTML = turn_num;
   gamestate = 0;
-  document.getElementById("Start_btn").innerHTML = "Start"
+  document.getElementById("Start_btn").innerHTML = "Start";
 }
 
 // generate map
 function setup(){
   for (var i = 0; i < 50; i++) {
-    target = Math.floor(Math.random() * 100)
-    new_wall = square[target]
+    target = Math.floor(Math.random() * 100);
+    new_wall = square[target];
     new_wall.classList.add("wall");
     new_wall.classList.add("health-3");
     new_wall.innerHTML = "<img src = \"images/catacombs_0.png\">";
   }
 
-  start_square = Math.floor(Math.random() * 100)
-  start_check = start_square
-  start_pos = square[start_square]
+  start_square = Math.floor(Math.random() * 100);
+  start_check = start_square;
+  start_pos = square[start_square];
   start_pos.classList.remove("wall");
   start_pos.classList.remove("health-3");
   start_pos.classList.add("position");
@@ -334,27 +335,27 @@ function setup(){
 
 
 
-  start_stairs_square = Math.floor(Math.random() * 50)
+  start_stairs_square = Math.floor(Math.random() * 50);
     if(start_check < 50){
-      start_stairs = square[(start_stairs_square + 50)]
+      start_stairs = square[(start_stairs_square + 50)];
     }
     else if (start_check <100) {
-      start_stairs = square[start_stairs_square]
+      start_stairs = square[start_stairs_square];
     }
   start_stairs.classList.remove("wall");
   start_stairs.classList.remove("health-3");
   start_stairs.classList.add("exit");
   start_stairs.innerHTML = "<img src = \"images/enter_lair.png\">";
 
-  start_monster_square = Math.floor(Math.random() * 50)
+  start_monster_square = Math.floor(Math.random() * 50);
   if (start_monster_square == start_stairs_square) {
-    start_monster_square = start_monster_square + 1
+    start_monster_square = start_monster_square + 1;
   }
     if(start_check < 50){
-      start_monster = square[(start_monster_square + 50)]
+      start_monster = square[(start_monster_square + 50)];
     }
     else if (start_check <100) {
-      start_monster = square[start_monster_square]
+      start_monster = square[start_monster_square];
 
     }
   start_monster.classList.remove("wall");
@@ -366,7 +367,7 @@ function setup(){
 // clear map
 function clear(){
   for (var i = 0; i < square.length; i++){
-  tile = square[i]
+  tile = square[i];
 
   tile.classList.remove("wall", "health-3", "health-2", "health-1", "exit", "position", "monster");
   tile.innerHTML = "";}
@@ -377,7 +378,7 @@ function clear(){
 
 // reduce wall health
 function damage(target){
-  health = target.classList[1]
+  health = target.classList[1];
 
   switch (health) {
     case "health-3":
@@ -406,7 +407,7 @@ function damage(target){
 function exit (){
   clear();
   setup();
-  floor_count = (floor_count + 1)
+  floor_count = (floor_count + 1);
   document.getElementById("floor_count").innerHTML = floor_count;
   position = document.getElementsByClassName("position")[0];
   monster = document.getElementsByClassName("monster")[0];
