@@ -30,6 +30,10 @@ Use of CSS to style and format the game.
 
 ## Demo Site
 
-A demo can be found at: 
+A demo can be found at:
 
 https://jozefmclaughlin.github.io/game-project/
+
+
+## Known Issues
+. Can move after the map is cleared which causes two positions to be present upon loading a new map.
