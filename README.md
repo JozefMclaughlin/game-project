@@ -16,3 +16,20 @@ Walls can be broken and the monster must be avoided, you must reach the stairs t
 A high score of the deepest floor reached is recorded and saved between runs.
 
 ## Implementation
+The functionality was achieved using:
+
+A table in HTML to create a grid, making it in to array in order to give each square a unique identifier.
+
+Using JS to assign classes and set innerHTML to the different squares to define the type of square they are and how they will interact.
+
+Using functions to check and move from one square to another and interact with other entities within the grid.
+
+Keeping track of variables and comparing them to other variables in order to keep a score.
+
+Use of CSS to style and format the game.
+
+## Demo Site
+
+A demo can be found at: 
+
+https://jozefmclaughlin.github.io/game-project/
