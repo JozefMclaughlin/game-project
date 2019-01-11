@@ -37,3 +37,4 @@ https://jozefmclaughlin.github.io/game-project/
 
 ## Known Issues
 . Can move after the map is cleared which causes two positions to be present upon loading a new map.
+. Troll can get caught between edge of map and stairs.
